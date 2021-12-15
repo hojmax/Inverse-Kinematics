@@ -28,7 +28,6 @@ const getLossGrid = ({ segments, armScale, goal, root, plotCanvasSize }) => {
     (y) => _.times(
       plotCanvasSize,
       (x) => {
-        // if ((x + y + 1) % 2 === 0) return 0.5
         const angles = pointToAngles({ point: { x, y }, width: plotCanvasSize, height: plotCanvasSize })
         const loss = calculateLoss(angles)
         maxLoss = Math.max(maxLoss, loss)

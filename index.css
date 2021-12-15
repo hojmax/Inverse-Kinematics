@@ -7,6 +7,14 @@ canvas {
   border: 1px solid lightGrey;
 }
 
+.canvas-title {
+  font-size: 16px;
+  margin-bottom: 5px;
+  width: 350px;
+  display: flex;
+  justify-content: center;
+}
+
 .main-container {
   display: flex;
   justify-content: space-evenly;
@@ -25,16 +33,6 @@ html {
   padding: 0px;
   margin: 0px;
   height: 100%;
-}
-
-.slider-container {
-  display: flex;
-  margin-top: 10px;
-}
-
-.control-container {
-  margin-left: -22px;
-  margin-top: 10px;
 }
 
 label {

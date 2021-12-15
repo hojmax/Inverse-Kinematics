@@ -30,18 +30,12 @@ const drawAll = () => {
   drawPlotCanvas()
 }
 const initiateSlider = (index) => {
-  function setLabel(number, index) {
-    const labelElement = document.getElementById(`label-${index}`)
-    labelElement.innerText = number.toFixed(1)
-  }
   const sliderElement = document.getElementById(`slider-${index}`)
   sliderElement.addEventListener("input", () => {
     let newSegments = [...state.segments]
     newSegments[index] = Number.parseFloat(sliderElement.value)
-    setLabel(state.segments[index], index)
     setSegments(newSegments)
   })
-  setLabel(state.segments[index], index)
 }
 
 const getCanvasMousePosition = (event, scalar = 1) => {

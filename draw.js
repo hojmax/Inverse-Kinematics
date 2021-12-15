@@ -7,11 +7,10 @@ const drawLine = (p1, p2, ctx) => {
     ctx.stroke()
 }
 
-
 const drawArm = ({ segments, angles, armScale, root }) => {
     const { ctx } = getCtx('arm-canvas')
     ctx.lineWidth = 10
-    ctx.strokeStyle = "rgba(200, 200, 200, 0.5)"
+    ctx.strokeStyle = "rgba(50, 50, 50, 0.5)"
     const joints = getArmJoints({ segments, angles, armScale, root })
     for (let i = 0; i < joints.length - 1; i++) {
         drawLine(joints[i], joints[i + 1], ctx)

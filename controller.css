@@ -1,0 +1,13 @@
+.control-container {
+    margin-top: 23px;
+    max-height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slider-legend {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}

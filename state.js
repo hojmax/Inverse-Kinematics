@@ -1,11 +1,11 @@
 let state = {
     segments: [5, 5],
-    angles: [0, -Math.PI / 4],
+    angles: [-Math.PI/4, -Math.PI / 2],
     goal: {
         x: 190,
         y: 190
     },
-    armScale: 10,
+    armScale: 9,
     root: {
         x: 175,
         y: 175
@@ -40,5 +40,4 @@ const setAngles = (newAngles) => {
 
 const setMouseIsClicked = (bool) => {
     state.mouseIsClicked = bool
-    console.log(state.mouseIsClicked)
 }
