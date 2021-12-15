@@ -1,0 +1,42 @@
+canvas {
+  width: 350px;
+  height: 350px;
+}
+
+#arm-canvas {
+  border: 1px solid lightGrey;
+}
+
+.main-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  font-family: Helvetica Neue;
+}
+
+body,
+html {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+}
+
+.slider-container {
+  display: flex;
+  margin-top: 10px;
+}
+
+.control-container {
+  margin-left: -22px;
+  margin-top: 10px;
+}
+
+label {
+  margin-left: 35px;
+}

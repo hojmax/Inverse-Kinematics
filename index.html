@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="plot.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/7.2.0/d3.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js'></script>
+    <script src='helpers.js'></script>
+    <script src='draw.js'></script>
+    <script src='state.js'></script>
+</head>
+
+<body>
+    <div class='main-container'>
+        <canvas id='arm-canvas' width='350' height='350'></canvas>
+        <div class='plot-container'>
+            <div class='plot-grid'>
+                <div class='y-axis-container'>
+                    <div class='y-axis-legend'>
+                        <div>V₁</div>
+                    </div>
+                    <div class='y-axis-labels'>
+                        <div style='margin-top: -9px'>-π</div>
+                        <div style='margin-bottom: -3px'>0</div>
+                        <div style='margin-bottom: -6px'>π</div>
+                    </div>
+                    <div class='y-axis'>
+                        <div class='y-tick'></div>
+                        <div class='y-tick'></div>
+                        <div class='y-tick'></div>
+                        <div class='y-tick'></div>
+                        <div class='y-tick'></div>
+                    </div>
+                </div>
+                <canvas id='plot-canvas' width='175' height='175'></canvas>
+                <div></div>
+                <div class='x-axis-container'>
+                    <div class='x-axis'>
+                        <div class='x-tick'></div>
+                        <div class='x-tick'></div>
+                        <div class='x-tick'></div>
+                        <div class='x-tick'></div>
+                        <div class='x-tick'></div>
+                    </div>
+                    <div class='x-axis-labels'>
+                        <div style="margin-left: -10px">-π</div>
+                        <div>0</div>
+                        <div style="margin-right: -4px">π</div>
+                    </div>
+                    <div class='x-axis-legend'>
+                        <div>V₀</div>
+                    </div>
+                </div>
+            </div>
+            <div class='control-container'>
+                <div class='slider-container'>
+                    <label id='label-0'></label>
+                    <input type="range" min="1" max="9" value="5" id="slider-0">
+                </div>
+                <div class='slider-container'>
+                    <label id='label-1'></label>
+                    <input type="range" min="1" max="9" value="5" id="slider-1">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src='index.js'></script>
+
+</html>
