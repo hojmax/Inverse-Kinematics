@@ -1,29 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Document</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="controller.css">
-    <link rel="stylesheet" href="plot.css">
+    <link rel='stylesheet' href='index.css'>
+    <link rel='stylesheet' href='controller.css'>
+    <link rel='stylesheet' href='plot.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/7.2.0/d3.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js'></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <script src='state.js'></script>
     <script src='helpers.js'></script>
     <script src='draw.js'></script>
-    <script src='state.js'></script>
 </head>
 
 <body>
     <div class='main-container'>
         <div class='plot-container'>
-            <div class='canvas-title'>Kinematic Arm</div>
+            <div class='canvas-title'>
+                Kinematic Arm&nbsp;<i class="fas fa-hand-point-up"></i>
+            </div>
             <canvas id='arm-canvas' width='350' height='350'></canvas>
         </div>
         <div class='plot-container'>
-            <div class='canvas-title'>Loss Function</div>
+            <div class='canvas-title'>
+                Loss Function&nbsp;<i class="fas fa-hand-point-up"></i>
+            </div>
             <div class='plot-grid'>
                 <div class='y-axis-container'>
                     <div class='y-axis-legend'>
@@ -53,9 +59,9 @@
                         <div class='x-tick'></div>
                     </div>
                     <div class='x-axis-labels'>
-                        <div style="margin-left: -10px">-π</div>
+                        <div style='margin-left: -10px'>-π</div>
                         <div>0</div>
-                        <div style="margin-right: -4px">π</div>
+                        <div style='margin-right: -4px'>π</div>
                     </div>
                     <div class='x-axis-legend'>
                         <div>V₀</div>
@@ -66,14 +72,25 @@
         <div class='control-container'>
             <div>
                 <div class='slider-legend'>L₀</div>
-                <input type="range" min="1" max="9" step="0.1" value="5" id="slider-0">
+                <input type='range' min='15' max='85' value='50' id='slider-0'>
             </div>
-            <div>
+            <div class='mt-3'>
                 <div class='slider-legend'>L₁</div>
-                <input type="range" min="1" max="9" step="0.1" value="5" id="slider-1">
+                <input type='range' min='15' max='85' value='50' id='slider-1'>
+            </div>
+            <div class='mt-4 checkbox-container'>
+                <input type="checkbox" name="gradient-switch" id="gradient-switch">
+                <label for="gradient-switch"></label>
+                <span class="ml-1">Gradient Descent</span>
+            </div>
+            <div class='mt-4 checkbox-container'>
+                <input type="checkbox" name="switch" id="switch">
+                <label for="switch"></label>
+                <span class="ml-1">Path</span>
             </div>
         </div>
     </div>
+    <div class='credit-text'>Built by Axel Højmark</div>
 </body>
 <script src='index.js'></script>
 

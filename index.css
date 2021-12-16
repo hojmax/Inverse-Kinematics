@@ -1,3 +1,8 @@
+:root {
+  --red: #d7513a;
+  --shadow: 0 0 20px #477a8550;
+}
+
 canvas {
   width: 350px;
   height: 350px;
@@ -5,6 +10,22 @@ canvas {
 
 #arm-canvas {
   border: 1px solid lightGrey;
+}
+
+.mt-4 {
+  margin-top: 20px;
+}
+
+.mt-3 {
+  margin-top: 15px;
+}
+
+.mt-2 {
+  margin-top: 10px;
+}
+
+.ml-1 {
+  margin-left: 8px;
 }
 
 .canvas-title {
@@ -37,4 +58,14 @@ html {
 
 label {
   margin-left: 35px;
+}
+
+.credit-text {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.3;
 }

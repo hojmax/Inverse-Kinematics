@@ -7,17 +7,23 @@ const drawLine = (p1, p2, ctx) => {
     ctx.stroke()
 }
 
-const drawArm = ({ segments, angles, armScale, root }) => {
-    const { ctx } = getCtx('arm-canvas')
-    ctx.lineWidth = 10
-    ctx.strokeStyle = "rgba(50, 50, 50, 0.5)"
-    const joints = getArmJoints({ segments, angles, armScale, root })
-    for (let i = 0; i < joints.length - 1; i++) {
-        drawLine(joints[i], joints[i + 1], ctx)
+const drawArm = ({ arm }) => {
+    arm.ctx.lineWidth = 10
+    arm.ctx.strokeStyle = "rgba(50, 50, 50, 0.5)"
+    for (let i = 0; i < arm.joints.length - 1; i++) {
+        drawLine(arm.joints[i], arm.joints[i + 1], arm.ctx)
     }
 }
-const drawCross = ({ point, crossScale, id, color, lineWidth }) => {
-    const { ctx } = getCtx(id)
+
+const drawPath = ({ plot, pathHistory }) => {
+    plot.ctx.setLineDash([1, 20]);
+    for (let i = 0; i < pathHistory.length - 1; i++) {
+        drawLine(pathHistory[i], pathHistory[i + 1], plot.ctx)
+    }
+    plot.ctx.setLineDash([]);
+}
+
+const drawCross = ({ point, crossScale, color, lineWidth, ctx }) => {
     ctx.lineWidth = lineWidth
     ctx.strokeStyle = color
     drawLine({
@@ -36,20 +42,19 @@ const drawCross = ({ point, crossScale, id, color, lineWidth }) => {
     }, ctx)
 }
 
-const drawPlot = ({ lossGrid }) => {
-    const { ctx, width, height } = getCtx("plot-canvas")
-    const img = ctx.getImageData(0, 0, width, height)
+const drawPlot = ({ plot }) => {
+    const img = plot.ctx.getImageData(0, 0, plot.canvasSize, plot.canvasSize)
     const pixels = img.data
-    for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-            const index = Math.floor((lossGrid[y][x]) * 100)
+    for (let y = 0; y < plot.canvasSize; y++) {
+        for (let x = 0; x < plot.canvasSize; x++) {
+            const index = Math.floor(plot.lossGrid[y][x] * state.colorAmount)
             const color = interpolatedColors[index]
-            const offset = (y * width + x) * 4
+            const offset = (y * plot.canvasSize + x) * 4
             pixels[offset] = color['r']
             pixels[offset + 1] = color['g']
             pixels[offset + 2] = color['b']
             pixels[offset + 3] = color['opacity'] * 255
         }
     }
-    ctx.putImageData(img, 0, 0)
+    plot.ctx.putImageData(img, 0, 0)
 }
