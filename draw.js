@@ -18,6 +18,8 @@ const drawArm = ({ arm }) => {
 const drawPath = ({ plot, pathHistory }) => {
     plot.ctx.setLineDash([1, 20]);
     for (let i = 0; i < pathHistory.length - 1; i++) {
+        if (Math.abs(pathHistory[i].x - pathHistory[i + 1].x) > 100) continue;
+        if (Math.abs(pathHistory[i].y - pathHistory[i + 1].y) > 100) continue;
         drawLine(pathHistory[i], pathHistory[i + 1], plot.ctx)
     }
     plot.ctx.setLineDash([]);
