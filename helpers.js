@@ -99,3 +99,10 @@ const getCtx = (id) => {
   const ctx = canvas.getContext("2d")
   return ctx
 }
+
+const getCanvasMousePosition = (event) => {
+  const rect = event.target.getBoundingClientRect()
+  const x = (event.clientX - rect.left)
+  const y = (event.clientY - rect.top)
+  return { x, y }
+}

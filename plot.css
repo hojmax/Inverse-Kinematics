@@ -72,3 +72,18 @@
 .y-tick {
     border-top: 2px solid black;
 }
+
+.double-canvas-container {
+    margin: 0px;
+    padding: 0px;
+    width: 350px;
+    height: 350px;
+    position: relative;
+}
+
+#plot-canvas,
+#plot-canvas-overlay {
+    top: 0px;
+    left: 0px;
+    position: absolute;
+}

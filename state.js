@@ -13,28 +13,39 @@ let state = {
     plot: {
         canvasSize: 175,
         lossGrid: [],
-        ctx: undefined
+        ctx: undefined,
+        overlay: {
+            ctx: undefined,
+            canvasSize: 350,
+        }
     },
     goal: {
         x: 45,
         y: 45
     },
+    learningRate: 0.00004,
     mouseIsClicked: false,
     doGradientDescent: false,
+    shouldDrawPath: false,
     colorAmount: 100,
     pathHistory: [],
-    shouldDrawPath: false,
 }
 
 const clearPathHistory = () => {
-    state.pathHistory = []
+    state.pathHistory = [
+        anglesToPoint({
+            angles: state.arm.angles,
+            width: state.plot.overlay.canvasSize,
+            height: state.plot.overlay.canvasSize,
+        })
+    ]
 }
 
 const addToPath = (angles) => {
     state.pathHistory.push(anglesToPoint({
         angles,
-        width: state.plot.canvasSize,
-        height: state.plot.canvasSize
+        width: state.plot.overlay.canvasSize,
+        height: state.plot.overlay.canvasSize
     }))
 }
 
@@ -46,16 +57,27 @@ const setPlotCtx = (newCtx) => {
     state.plot.ctx = newCtx;
 }
 
+const setPlotOverlayCtx = (newCtx) => {
+    state.plot.overlay.ctx = newCtx;
+}
+
 const setDoGradientDescent = (bool) => {
-    if (!bool) clearPathHistory()
     state.doGradientDescent = bool
+}
+
+const setShouldDrawPath = (bool) => {
+    state.shouldDrawPath = bool;
+    drawPlotOverlay()
 }
 
 const setGoal = (newGoal) => {
     if (_.isEqual(newGoal, state.goal)) return
     state.goal = newGoal
     setLossGrid(getLossGrid(state))
-    drawAll()
+    drawArmCanvas()
+    drawPlot(state)
+    clearPathHistory()
+    drawPlotOverlay()
 }
 
 const setLossGrid = (newLossGrid) => {
@@ -71,17 +93,25 @@ const setSegments = (newSegments) => {
     state.arm.segments = newSegments
     setJoints(getArmJoints(state))
     setLossGrid(getLossGrid(state))
-    drawAll()
+    drawArmCanvas()
+    drawPlot(state)
+    clearPathHistory()
+    drawPlotOverlay()
 }
 
 const setAngles = (newAngles) => {
     if (_.isEqual(newAngles, state.arm.angles)) return
     state.arm.angles = newAngles
     setJoints(getArmJoints(state))
-    drawAll()
+    drawPlotOverlay()
+    drawArmCanvas()
 }
 
 const setMouseIsClicked = (bool) => {
     if (bool) clearPathHistory()
     state.mouseIsClicked = bool
+}
+
+const setLearningRate = (newLearningRate) => {
+    state.learningRate = newLearningRate
 }

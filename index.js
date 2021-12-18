@@ -4,7 +4,6 @@ const drawArmCanvas = () => {
   state.arm.ctx.translate(state.arm.root.x, state.arm.root.y)
   drawArm(state)
   drawCross({
-    id: 'arm-canvas',
     crossScale: 5,
     lineWidth: 2,
     point: state.goal,
@@ -14,26 +13,31 @@ const drawArmCanvas = () => {
   state.arm.ctx.restore()
 }
 
-const drawPlotCanvas = () => {
-  drawPlot(state)
+const drawPlotOverlay = () => {
+  state.plot.overlay.ctx.clearRect(
+    0,
+    0,
+    state.plot.overlay.canvasSize,
+    state.plot.overlay.canvasSize
+  )
+  if (state.shouldDrawPath) drawPath(state)
   drawCross({
-    id: 'plot-canvas',
-    crossScale: 2.5,
-    lineWidth: 1,
+    crossScale: 5,
+    lineWidth: 2,
     point: anglesToPoint({
       angles: state.arm.angles,
-      width: state.plot.canvasSize,
-      height: state.plot.canvasSize
+      width: state.plot.overlay.canvasSize,
+      height: state.plot.overlay.canvasSize
     }),
     color: 'white',
-    ctx: state.plot.ctx
+    ctx: state.plot.overlay.ctx
   })
 }
 
 const drawAll = () => {
   drawArmCanvas()
-  drawPlotCanvas()
-  drawPath(state)
+  drawPlot(state)
+  drawPlotOverlay()
 }
 
 const sliderListener = (index) => {
@@ -46,16 +50,12 @@ const sliderListener = (index) => {
   })
 }
 
-const getCanvasMousePosition = (event, scalar = 1) => {
-  const rect = event.target.getBoundingClientRect()
-  const x = (event.clientX - rect.left) / scalar
-  const y = (event.clientY - rect.top) / scalar
-  return { x, y }
-}
-
 const canvasListener = (id, action) => {
   document.getElementById(id).addEventListener("mousemove", action)
-  document.getElementById(id).addEventListener("mousedown", action)
+  document.getElementById(id).addEventListener("mousedown", event => {
+    action(event)
+    drawPlotOverlay()
+  })
 }
 
 window.addEventListener('mouseup', (e) => {
@@ -73,8 +73,7 @@ const animateGradientDescent = (time) => {
   lastTime = time
   if (!state.doGradientDescent || state.mouseIsClicked) return
   const gradient = getGradient(state)
-  const learningRate = 0.00004
-  const newAngles = state.arm.angles.map((e, i) => boundAngle(e - gradient[i] * learningRate))
+  const newAngles = state.arm.angles.map((e, i) => boundAngle(e - gradient[i] * state.learningRate))
   addToPath(newAngles)
   setAngles(newAngles)
 }
@@ -90,25 +89,34 @@ const setup = () => {
     const { x, y } = getCanvasMousePosition(event)
     setGoal({ x: x - state.arm.root.x, y: y - state.arm.root.y })
   })
-  canvasListener('plot-canvas', event => {
+  canvasListener('plot-canvas-overlay', event => {
     const mouseIsDown = event.buttons === 1
-    setMouseIsClicked(mouseIsDown)
     if (!mouseIsDown) return
-    const { x, y } = getCanvasMousePosition(event, 2)
+    const { x, y } = getCanvasMousePosition(event)
     const newAngles = pointToAngles({
       point: { x, y },
-      width: state.plot.canvasSize,
-      height: state.plot.canvasSize
+      width: state.plot.overlay.canvasSize,
+      height: state.plot.overlay.canvasSize
     })
+    //hmm
     setAngles(newAngles)
+    setMouseIsClicked(true)
   })
   document.getElementById('gradient-switch').addEventListener('click', event => {
     setDoGradientDescent(event.target.checked)
+  })
+  document.getElementById('path-switch').addEventListener('click', event => {
+    setShouldDrawPath(event.target.checked)
+  })
+  document.getElementById('learning-rate-slider').addEventListener("input", event => {
+    setLearningRate(Math.pow(Number.parseFloat(event.target.value), 2) / 100000)
   })
   setLossGrid(getLossGrid(state))
   setJoints(getArmJoints(state))
   setArmCtx(getCtx('arm-canvas'))
   setPlotCtx(getCtx('plot-canvas'))
+  setPlotOverlayCtx(getCtx('plot-canvas-overlay'))
+  clearPathHistory()
   drawAll()
 }
 

@@ -15,14 +15,33 @@ const drawArm = ({ arm }) => {
     }
 }
 
+const drawCircle = (p, ctx) => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 2, 0, 2 * Math.PI, false);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+    ctx.stroke();
+}
+
 const drawPath = ({ plot, pathHistory }) => {
-    plot.ctx.setLineDash([1, 20]);
+    if (pathHistory.length < 2) return
+    drawCircle(pathHistory[0], plot.overlay.ctx)
+    plot.overlay.ctx.beginPath()
+    plot.overlay.ctx.moveTo(pathHistory[0].x, pathHistory[0].y)
+    plot.overlay.ctx.setLineDash([3, 10]);
     for (let i = 0; i < pathHistory.length - 1; i++) {
-        if (Math.abs(pathHistory[i].x - pathHistory[i + 1].x) > 100) continue;
-        if (Math.abs(pathHistory[i].y - pathHistory[i + 1].y) > 100) continue;
-        drawLine(pathHistory[i], pathHistory[i + 1], plot.ctx)
+        if (Math.abs(pathHistory[i].x - pathHistory[i + 1].x) > 300) {
+            plot.overlay.ctx.moveTo(pathHistory[i + 1].x, pathHistory[i + 1].y)
+            continue;
+        }
+        if (Math.abs(pathHistory[i].y - pathHistory[i + 1].y) > 300) {
+            plot.overlay.ctx.moveTo(pathHistory[i + 1].x, pathHistory[i + 1].y)
+            continue;
+        }
+        plot.overlay.ctx.lineTo(pathHistory[i + 1].x, pathHistory[i + 1].y)
     }
-    plot.ctx.setLineDash([]);
+    plot.overlay.ctx.stroke()
+    plot.overlay.ctx.setLineDash([]);
 }
 
 const drawCross = ({ point, crossScale, color, lineWidth, ctx }) => {
