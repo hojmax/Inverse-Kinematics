@@ -42,7 +42,7 @@ const drawAll = () => {
 
 const sliderListener = (index) => {
   const sliderElement = document.getElementById(`slider-${index}`)
-  sliderElement.addEventListener("input", () => {
+  sliderElement.addEventListener('input', () => {
     let newSegments = [...state.arm.segments]
     newSegments[index] = Number.parseFloat(sliderElement.value)
     if (index === 0) newSegments[index] += 0.1
@@ -51,8 +51,8 @@ const sliderListener = (index) => {
 }
 
 const canvasListener = (id, action) => {
-  document.getElementById(id).addEventListener("mousemove", action)
-  document.getElementById(id).addEventListener("mousedown", event => {
+  document.getElementById(id).addEventListener('mousemove', action)
+  document.getElementById(id).addEventListener('mousedown', event => {
     action(event)
     drawPlotOverlay()
   })
@@ -98,7 +98,6 @@ const setup = () => {
       width: state.plot.overlay.canvasSize,
       height: state.plot.overlay.canvasSize
     })
-    //hmm
     setAngles(newAngles)
     setMouseIsClicked(true)
   })
@@ -108,7 +107,7 @@ const setup = () => {
   document.getElementById('path-switch').addEventListener('click', event => {
     setShouldDrawPath(event.target.checked)
   })
-  document.getElementById('learning-rate-slider').addEventListener("input", event => {
+  document.getElementById('learning-rate-slider').addEventListener('input', event => {
     setLearningRate(Math.pow(Number.parseFloat(event.target.value), 2) / 100000)
   })
   setLossGrid(getLossGrid(state))
@@ -117,7 +116,48 @@ const setup = () => {
   setPlotCtx(getCtx('plot-canvas'))
   setPlotOverlayCtx(getCtx('plot-canvas-overlay'))
   clearPathHistory()
+
   drawAll()
+  const data = [{
+    x: _.times(175, i => i / 174 * Math.PI * 2 - Math.PI),
+    y: _.times(175, i => i / 174 * Math.PI * 2 - Math.PI),
+    z: state.plot.lossGrid,
+    type: 'surface',
+    showscale: false,
+    colorscale: [
+      [0 / 3, 'blue'],
+      [1 / 3, 'green'],
+      [2 / 3, 'yellow'],
+      [3 / 3, 'red'],
+    ]
+  }]
+  const layout = {
+    width: 350,
+    height: 350,
+    margin: {
+      l: 0,
+      r: 0,
+      b: 0,
+      t: 0,
+    },
+    scene: {
+      'xaxis': {
+        text: 'hmm',
+        'visible': false,
+        'showgrid': false,
+      },
+      'yaxis': {
+        'visible': false,
+        'showgrid': false,
+      },
+      'zaxis': {
+        'visible': false,
+        'showgrid': false,
+      },
+    },
+  }
+  console.log(data)
+  Plotly.newPlot('plot-3d', data, layout);
 }
 
 setup()

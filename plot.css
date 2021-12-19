@@ -87,3 +87,7 @@
     left: 0px;
     position: absolute;
 }
+
+#plot-3d {
+    border: 1px solid lightGrey;
+}

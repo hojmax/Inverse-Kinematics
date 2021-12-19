@@ -11,8 +11,7 @@
     <link rel='stylesheet' href='plot.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/7.2.0/d3.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js'></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <script src='https://cdn.plot.ly/plotly-2.6.3.min.js'></script>ª
     <script src='state.js'></script>
     <script src='helpers.js'></script>
     <script src='draw.js'></script>
@@ -22,13 +21,13 @@
     <div class='main-container'>
         <div class='plot-container'>
             <div class='canvas-title'>
-                Kinematic Arm&nbsp;<i class="fas fa-hand-point-up"></i>
+                Kinematic Arm
             </div>
             <canvas id='arm-canvas' width='350' height='350'></canvas>
         </div>
         <div class='plot-container'>
             <div class='canvas-title'>
-                Loss Function&nbsp;<i class="fas fa-hand-point-up"></i>
+                Loss Function
             </div>
             <div class='plot-grid'>
                 <div class='y-axis-container'>
@@ -48,10 +47,11 @@
                         <div class='y-tick'></div>
                     </div>
                 </div>
-                <div class='double-canvas-container'>
+                <div class='double-canvas-container' style='display: none'>
                     <canvas id='plot-canvas' width='175' height='175'></canvas>
                     <canvas id='plot-canvas-overlay' width='350' height='350'></canvas>
                 </div>
+                <div id='plot-3d'></div>
                 <div></div>
                 <div class='x-axis-container'>
                     <div class='x-axis'>

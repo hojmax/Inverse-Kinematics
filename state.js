@@ -97,6 +97,45 @@ const setSegments = (newSegments) => {
     drawPlot(state)
     clearPathHistory()
     drawPlotOverlay()
+
+    const data = [{
+        x: _.times(175, i => i / 174 * Math.PI * 2 - Math.PI),
+        y: _.times(175, i => i / 174 * Math.PI * 2 - Math.PI),
+        z: state.plot.lossGrid,
+        type: 'surface',
+        showscale: false,
+        colorscale: [
+            [0 / 3, 'blue'],
+            [1 / 3, 'green'],
+            [2 / 3, 'yellow'],
+            [3 / 3, 'red'],
+        ]
+    }]
+    const layout = {
+        width: 350,
+        height: 350,
+        margin: {
+            l: 0,
+            r: 0,
+            b: 0,
+            t: 0,
+        },
+        scene: {
+            'xaxis': {
+                'visible': false,
+                'showgrid': false,
+            },
+            'yaxis': {
+                'visible': false,
+                'showgrid': false,
+            },
+            'zaxis': {
+                'visible': false,
+                'showgrid': false,
+            },
+        },
+    }
+    Plotly.newPlot('plot-3d', data, layout);
 }
 
 const setAngles = (newAngles) => {
