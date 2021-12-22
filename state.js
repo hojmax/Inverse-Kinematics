@@ -23,12 +23,22 @@ let state = {
         x: 45,
         y: 45
     },
+    lastGradient: [],
+    momentum: 0,
     learningRate: 0.00004,
     mouseIsClicked: false,
     doGradientDescent: false,
     shouldDrawPath: false,
     colorAmount: 100,
     pathHistory: [],
+}
+
+const setMomentum = (newMomentum) => {
+    state.momentum = newMomentum
+}
+
+const setLastGradient = (newLastGradient) => {
+    state.lastGradient = newLastGradient
 }
 
 const clearPathHistory = () => {

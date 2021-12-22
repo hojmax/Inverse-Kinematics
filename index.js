@@ -72,8 +72,12 @@ const animateGradientDescent = (time) => {
   if (delta <= 1000 / fps) return
   lastTime = time
   if (!state.doGradientDescent || state.mouseIsClicked) return
-  const gradient = getGradient(state)
-  const newAngles = state.arm.angles.map((e, i) => boundAngle(e - gradient[i] * state.learningRate))
+  const gradient = addMomentum({
+    ...state,
+    gradient: getGradient(state)
+  })
+  const newAngles = state.arm.angles.map((e, i) => boundAngle(e - gradient[i]))
+  setLastGradient(gradient)
   addToPath(newAngles)
   setAngles(newAngles)
 }
@@ -98,7 +102,6 @@ const setup = () => {
       width: state.plot.overlay.canvasSize,
       height: state.plot.overlay.canvasSize
     })
-    //hmm
     setAngles(newAngles)
     setMouseIsClicked(true)
   })
@@ -110,6 +113,9 @@ const setup = () => {
   })
   document.getElementById('learning-rate-slider').addEventListener("input", event => {
     setLearningRate(Math.pow(Number.parseFloat(event.target.value), 2) / 100000)
+  })
+  document.getElementById('momentum-slider').addEventListener("input", event => {
+    setMomentum(Number.parseFloat(event.target.value))
   })
   setLossGrid(getLossGrid(state))
   setJoints(getArmJoints(state))

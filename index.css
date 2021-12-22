@@ -12,6 +12,10 @@ canvas {
   border: 1px solid lightGrey;
 }
 
+.mt-5 {
+  margin-top: 25px;
+}
+
 .mt-4 {
   margin-top: 20px;
 }

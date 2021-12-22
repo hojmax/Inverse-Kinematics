@@ -7,7 +7,7 @@ const goalArmDistance = ({ arm, goal }) => (angles) => {
   return distance(joints[joints.length - 1], goal)
 }
 
-const getGradient = ({ arm, goal }) => {
+const getGradient = ({ arm, goal, learningRate }) => {
   const l0 = arm.segments[0]
   const l1 = arm.segments[1]
   const v0 = arm.angles[0]
@@ -19,9 +19,14 @@ const getGradient = ({ arm, goal }) => {
   const deltaX = gx - armX
   const deltaY = gy - armY
   return [
-    (deltaX * Math.sin(v0) - deltaY * Math.cos(v0)) * l0,
-    (deltaX * Math.sin(v1) - deltaY * Math.cos(v1)) * l1
+    (deltaX * Math.sin(v0) - deltaY * Math.cos(v0)) * l0 * learningRate,
+    (deltaX * Math.sin(v1) - deltaY * Math.cos(v1)) * l1 * learningRate
   ]
+}
+
+const addMomentum = ({ gradient, lastGradient, momentum }) => {
+  if (lastGradient.length == 0) return gradient
+  return gradient.map((e, i) => e + lastGradient[i] * momentum)
 }
 
 const getArmJoints = ({ arm }) => {
