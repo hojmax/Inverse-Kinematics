@@ -24,7 +24,7 @@ In the next GIF gradient descent is turned on:
 You can see how the arm now automatically moves towards the target, or rather finds the locally optimal arm configuration. 
 
 There are several other parameters that can be tweaked, such as the segment lengths, the learning rate and momentum. I will not elaborate on these any further, but rather invite you to try them out yourself 😊
-g
+
 ## 🏄‍♂️ Usage
 
 As this project is built using vanilla javascript, all you need is to open `index.html` in your browser.
