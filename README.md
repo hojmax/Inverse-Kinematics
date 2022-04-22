@@ -10,8 +10,8 @@ In the GIF below you see two draggable plots:
 
 ![](images/drag.gif)
 
- On the left is the kinematic arm with the target position marked by the red cross.
- On the right is a plot over the parameter space, with the white cross representing the current arm configuration.
+ On the left is the kinematic arm with the target position marked by the red mark.
+ On the right is a plot over the parameter space, with the white mark representing the current arm configuration.
  
  Each axis of the right plot represents a joint angle and ranges from -𝜋 to 𝜋. Every possible arm configuration is therefore represented by a single point in the parameter. You can see this visually by how changing the position in the parameter space changes the arm accordingly.
  
