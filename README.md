@@ -13,7 +13,7 @@ In the GIF below you see two draggable plots:
  On the left is the kinematic arm with the target position marked by the red mark.
  On the right is a plot over the parameter space, with the white mark representing the current arm configuration.
  
- Each axis of the right plot represents a joint angle and ranges from -𝜋 to 𝜋. Every possible arm configuration is therefore represented by a single point in the parameter. You can see this visually by how changing the position in the parameter space changes the arm accordingly.
+ Each axis of the right plot represents a joint angle and ranges from -𝜋 to 𝜋. Every possible arm configuration is therefore represented by a single point in the parameter space. You can see this visually by how changing the position in the parameter space changes the arm accordingly.
  
  The color coding of the parameter space are a visualization of the loss function. I define the loss function as the distance between the end of the arm and the target. For every possible arm configuration (pixel) i calculate the loss and normalize the value to range between 0 and 1. This value gets mapped between the colors red, yellow, green and blue, where red corresponds to 1 and blue to 0. This is also evident in the GIF, as arm configurations in bluish regions are much closer to the target then more reddish configurations.
 
