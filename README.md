@@ -4,9 +4,9 @@
 
 This project is a visualization and interactive tool for inverse kinematics and gradient descent in general. The inverse kinematics problem is to find the joint angles of an 'arm' such that it minimizes the distance to a target position. In this project i use gradient descent to optimize the joint angles. For the sake of visulization i constrain the problem to an arm with 2 joints in 2 dimensions, but this technique can easily be generalized to higher dimensions.
 
-## 🖥 [Live Demo](https://hojmax.github.io/Inverse-Kinematics/)
+## 🖥 Live Demo
 
-In the GIF below you see two draggable plots:
+You can view the project [here](https://hojmax.github.io/Tetris-Bot/). On the page you will see two draggable plots:
 
 ![](images/drag.gif)
 
