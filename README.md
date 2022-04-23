@@ -6,7 +6,7 @@ This project is a visualization and interactive tool for inverse kinematics and 
 
 ## 🖥 Live Demo
 
-You can view the project [here](https://hojmax.github.io/Tetris-Bot/). On the page you will see two draggable plots:
+You can view the project [here](https://hojmax.github.io/Inverse-Kinematics/). On the page you will see two draggable plots:
 
 ![](images/drag.gif)
 
