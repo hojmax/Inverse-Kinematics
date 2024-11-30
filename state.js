@@ -27,8 +27,8 @@ let state = {
     momentum: 0,
     learningRate: 0.00004,
     mouseIsClicked: false,
-    doGradientDescent: false,
-    shouldDrawPath: false,
+    doGradientDescent: true,
+    shouldDrawPath: true,
     colorAmount: 100,
     pathHistory: [],
 }
